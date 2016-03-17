@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+<div class="container">
+<div id="toolbar" class="columns-right pull-right">
+    <button id="reload" class="btn btn-default" type="reload" name="reload" title="Refresh">
+        <i class="glyphicon glyphicon-refresh icon-refresh"></i></button></div>
+<table id="table"
+        data-query-params="queryParams"
+        data-pagination="true"
+        data-search="true"
+        data-show-export="true"
+        data-toolbar="#toolbar"
+        data-show-pagination-switch="true"
+        data-show-toggle="true"
+        data-show-columns="true"
+        data-sort-name="stargazers_count"
+        data-sortable="true"
+        data-sort-order="desc"
+        data-detail-view="false"
+        data-card-view="false"
+        data-toolbar="#toolbarss"
+        data-page-size=2>
+    <thead>
+    <tr>
+        <th data-field="rid">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="mname">Forks</th>
+        <th data-field="description">Description</th>
+    </tr>
+    </thead>
+</table>
+</div>
+<script>
+var ul="http://127.0.0.1:7000/json?func=get_mids"
+function gd(ul){$.ajax({url:ul,success:function(d){$('#table').bootstrapTable(
+            {data:JSON.parse(d)})}})}
+function lo(ul){$.ajax({url:ul,success:function(d){$('#table').bootstrapTable('load',JSON.parse(d))}})}
+
+gd(ul);
+$(function () {
+    var $table = $('#table'),
+        $button = $('#reload');
+    $button.click(function () {
+        lo(ul);
+        });
+    });
+
+</script>
+</body>
+</html>

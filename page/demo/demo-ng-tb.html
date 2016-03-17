@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+</head>
+<body>
+<table id="table">
+    <thead>
+    <tr>
+        <th data-field="rid">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="mname">Forks</th>
+        <th data-field="description">Description</th>
+    </tr>
+    </thead>
+</table>
+<script>
+    var data =[{"pub_mediaid":"1015892","mname":"体验达人","rid":1},{"pub_mediaid":"1006458","mname":"零钱宝","rid":2},{"pub_mediaid":"1003139","mname":"淘粉吧","rid":3},{"pub_mediaid":"1022265","mname":"消灭糖果星星","rid":4},{"pub_mediaid":"1009235","mname":"二层楼书院","rid":5}]
+$(function () {
+    $('#table').bootstrapTable({
+        data: data
+    });
+});
+</script>
+</body>
+</html>

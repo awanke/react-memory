@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+    <h1>angular 获取数据</h1>
+<div ng-app="myApp" ng-controller="customersCtrl">
+    imei={{ imei}}
+<table id="table">
+    <thead>
+    <tr>
+        <th data-field="rid">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="mname">Forks</th>
+        <th data-field="description">Description</th>
+    </tr>
+    </thead>
+</table>
+</div>
+<script>
+var ul = 'http://127.0.0.1:7000/json/?func=get_mids'
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+                 $http.get(ul).success(function (data) {
+                     $scope.imei = data;
+                     $scope.event = 'event';
+                     console.log(data);
+    $('#table').bootstrapTable({data: data});
+    });
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="customersCtrl">
+imei=    {{ imei}}
+dd=    {{ dd}}
+</div>
+
+<script>
+function gds(url) {
+    console.log("run gds");
+    rows = url;
+    }
+function gds2(url) {
+    rows = url;
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+                    $http.get(ul).success(function (data) {
+                        $scope.imei = data;
+                        $scope.event = 'event';
+                        console.log(data);
+                        rows = data;
+                        return rows;
+                    });
+                    console.log(rows);
+                    return rows;
+                });
+    console.log("run gds2");
+    return rows;
+    }
+
+var ul = 'http://127.0.0.1:7000/json/?func=get_mids'
+rs = gds2(ul);
+console.log(rs);
+
+</script>
+</body>
+</html>

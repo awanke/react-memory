@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+</head>
+<body>
+<script>
+function gds(url) {
+    $(document).ready(function(){$("button").click(function(){
+          $.ajax({
+              url:url,
+              success:function(data){
+                  $("#div1").html(data);
+              }
+          });
+        });
+    });
+    console.log("run gds2");
+    }
+var ul = 'http://127.0.0.1:7000/json/?func=get_mids'
+rs = gds(ul);
+console.log(rs);
+</script>
+<div id="div1"><h2>使用 jQuery AJAX 修改文本内容</h2></div>
+<button>获取其他内容</button>
+</body>
+</html>

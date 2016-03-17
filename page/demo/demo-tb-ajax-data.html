@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+       data-url="http://127.0.0.1:7000/json?func=get_mids"
+<table id="table"
+        data-query-params="queryParams"
+        data-pagination="true"
+        data-search="true"
+        data-show-export="true"
+        data-toolbar="#toolbar"
+        data-show-refresh="true"
+        data-show-pagination-switch="true"
+        data-show-toggle="true"
+        data-show-columns="true"
+        data-sort-name="stargazers_count"
+        data-sortable="true"
+        data-sort-order="desc"
+        data-detail-view="false"
+        data-card-view="false"
+        data-page-size=5
+        data-page-number=1
+        data-row-style="rowStyle">
+    <thead>
+    <tr>
+        <th data-field="mname" data-sortable="true">imei</th>
+        <th data-field="rid" data-sortable="true">rid</th>
+        <th data-field="event" data-sortable="true">event</th>
+        <th data-field="description" data-sortable="true">Description</th>
+    </tr>
+    </thead>
+</table>
+<script>
+    var da =[{"pub_mediaid":"1015892","mname":"体验达人","rid":1},{"pub_mediaid":"1006458","mname":"零钱宝","rid":2},{"pub_mediaid":"1003139","mname":"淘粉吧","rid":3},{"pub_mediaid":"1022265","mname":"消灭糖果星星","rid":4},{"pub_mediaid":"1009235","mname":"二层楼书院","rid":5}]
+    var   ul="http://127.0.0.1:7000/json?func=get_mids"
+$(function () {
+$('#table').bootstrapTable({
+    url:ul,
+    data: da,
+    ajax: $.ajax({
+              url:ul,
+              success:function(data){
+              console.log(data);}
+          }),
+});
+});
+$(function () {
+    var $table = $('#table-output');
+        // $table.bootstrapTable('refreshOptions', {exportDataType: $(this).val()});
+    $table.bootstrapTable({data:da});
+    });
+</script>
+
+</body>
+</html>

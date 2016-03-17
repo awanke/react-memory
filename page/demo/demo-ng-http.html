@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+234
+    {{ imei + ', ' + event }}
+    {{ imei}}
+    {{ x.imei + ', ' + x.event }}
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.Name + ', ' + x.Country }}
+  </li>
+</ul>
+
+</div>
+
+<script>
+var ul = 'http://127.0.0.1:7000/accounts/sql/add/?func=json.test'
+var ul = 'http://127.0.0.1:7000/json/?func=get_mids'
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+                 $http.get(ul).success(function (data) {
+                     $scope.imei = data;
+                     $scope.event = 'event';
+                     console.log(data);
+                                 });
+});
+</script>
+</body>
+</html>

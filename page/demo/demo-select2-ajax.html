@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+    <script src="/page/js/ut-api.js"></script>
+</head>
+<body>
+    <div class="container">
+<div class="row">
+  <div class="col-xs-2">媒体
+        <select class="jss form-control" multiple="multiple">
+            <option selected="selected">orange</option>
+            <option selected="selected">purple</option>
+       </select>
+  </div>
+  <div class="col-xs-2">planid<input type="text" class="form-control"></div>
+  <div class="col-xs-2">imei<input type="text" class="form-control"></div>
+  <div class="col-xs-2">uid<input type="text" class="form-control"></div>
+</div>
+</div>
+<script type="text/javascript">
+var ul = "http://127.0.0.1:7000/json?func=get_mids"
+var select = $(".jss")
+function gauto(ul, select){
+select.select2({
+  tags: true,
+  tokenSeparators: [',', ' '],
+  minimumInputLength: 0,
+  ajax: {
+    url:ul,
+    processResults: function (data, page) {
+      var ds = JSON.parse(data);
+      var arr = [];
+      for(var x in ds){
+         // console.log(ds[x]);
+          ds[x].id = x
+          ds[x].text = ds[x].mname
+          arr.push(ds[x]); //这个应该是个json对象
+      }
+      console.log(arr);
+      return {results:arr};
+    },
+  },
+})
+}
+gauto(ul, select);
+</script>
+</body>
+</html>

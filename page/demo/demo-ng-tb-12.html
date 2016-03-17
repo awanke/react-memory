@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+    名字 : <input type="text"  value="ddd">123
+<div ng-app="myApp" ng-controller="customersCtrl">
+    名字 : <input type="text" ng-model="name" value="ddd">123
+<h1>Hello {{name}}</h1>
+    ul={{ ul}}
+    imei={{ imei}}
+    <hr/>
+<table id="table">
+    <thead>
+    <tr>
+        <th data-field="rid">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="mname">Forks</th>
+        <th data-field="description">Description</th>
+    </tr>
+    </thead>
+</table>
+<script>
+    var data =[{"pub_mediaid":"1015892","mname":"体验达人","rid":1},{"pub_mediaid":"1006458","mname":"零钱宝","rid":2},{"pub_mediaid":"1003139","mname":"淘粉吧","rid":3},{"pub_mediaid":"1022265","mname":"消灭糖果星星","rid":4},{"pub_mediaid":"1009235","mname":"二层楼书院","rid":5}]
+$(function () {
+    //$('#table').bootstrapTable({data: data});
+});
+</script>
+
+    <hr/>
+foot={{ul}}
+foot={{imei}}
+</div>
+<script>
+var ul = 'http://127.0.0.1:7000/accounts/sql/add/?func=json.test'
+var ul = 'http://127.0.0.1:7000/json/?func=get_mids'
+data = [{"pub_mediaid":"1018727","mname":"极锁屏","rid":1},{"pub_mediaid":"1028988","mname":"赚多宝2016.3.8","rid":2},{"pub_mediaid":"1028130","mname":"锁屏精灵","rid":3},{"pub_mediaid":"1009266","mname":"聚宝盆-会赚钱的APP","rid":4},{"pub_mediaid":"1026391","mname":"招财豆","rid":5}]
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+                 $http.get(ul).success(function (data) {
+                     $scope.imei = data;
+                     $scope.event = 'event';
+                     console.log(data);
+    $('#table').bootstrapTable({data: data});
+    });
+});
+
+</script>
+</body>
+</html>

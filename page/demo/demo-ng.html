@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/angular-1.4.6.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Home</a></div>
+        <div class="navbar-header"><span class="navbar-brand">记忆游戏</span></div>
+        <div class="navbar-header"><a class="navbar-brand" href="/api/index.html">api</a></div>
+    </div>
+</nav>
+<div ng-app="myApp" ng-controller="customersCtrl">
+{{imei}}
+</div>
+<script>
+var ul = 'http://127.0.0.1:7000/accounts/sql/add/?func=json.test'
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $http.get(ul)
+  $http.get(ul).success(function (data) {$scope.imei = data;
+                                             $scope.event = 'event';
+                                         });
+});
+
+<div ng-app="">
+<p>名字 : <input type="text" ng-model="name"></p>
+<h1>Hello {{name}}</h1>
+<frame> {{imei}} </frame>
+</div>
+</body>
+</html>

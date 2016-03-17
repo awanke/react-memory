@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Home</a></div>
+        <div class="navbar-header"><span class="navbar-brand">记忆游戏</span></div>
+        <div class="navbar-header"><a class="navbar-brand" href="/api/index.html">api</a></div>
+    </div>
+</nav>
+<script>
+$(function () {
+    var $table = $('#table-output');
+    $('#toolbar').find('select').change(function () {
+        $table.bootstrapTable('refreshOptions', {exportDataType: $(this).val()});
+      });
+    });
+</script>
+<div id="toolbar">
+    <select class="form-control">
+       <option value="selected">Export Selected</option>
+    </select>
+</div>
+<table id="table-outpub"
+        data-toggle="table"
+        data-url="http://127.0.0.1:7000/json?func=get_mids"
+        data-query-params="queryParams"
+        data-pagination="true"
+        data-search="true"
+        data-show-export="true"
+        data-toolbar="#toolbar"
+        data-show-refresh="true"
+        data-show-pagination-switch="true"
+        data-show-toggle="true"
+        data-show-columns="true"
+        data-sort-name="stargazers_count"
+        data-sortable="true"
+        data-sort-order="desc"
+        data-detail-view="false"
+        data-card-view="false"
+        data-page-size=5
+        data-page-number=1
+        data-row-style="rowStyle">
+    <thead>
+    <tr>
+        <th data-field="mname" data-sortable="true">imei</th>
+        <th data-field="rid" data-sortable="true">rid</th>
+        <th data-field="event" data-sortable="true">event</th>
+        <th data-field="description" data-sortable="true">Description</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>

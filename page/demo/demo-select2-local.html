@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+    <script src="/page/js/ut-api.js"></script>
+</head>
+<body>
+<select class="dary"></select>
+<select class="daryed">
+  <option value="2" selected="selected">duplicate</option>
+</select>
+<script type="text/javascript">
+var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+$(".dary").select2({
+  data: data
+})
+$(".daryed").select2({
+  data: data
+})
+function gdft(ul, tb){
+var ul="http://127.0.0.1:7000/json?func=get_mids"
+    $.ajax({url:ul,success:function(d){tb.bootstrapTable({data:JSON.parse(d)})}})}
+</script>
+</body>
+</html>

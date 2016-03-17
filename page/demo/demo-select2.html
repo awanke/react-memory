@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-table.css" rel="stylesheet">
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/bootstrap-3.2.0.min.js"></script>
+    <script src="/static/js/bootstrap-table.js"></script>
+    <script src="/static/js/tableExport.js"></script>
+    <script src="/static/js/bootstrap-table-export.js"></script>
+    <link href="/static/css/select2.min.css" rel="stylesheet" />
+    <link href="/static/css/jquery.autocomplete.css" rel="stylesheet" />
+    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/jquery.autocomplete.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Home</a></div>
+        <div class="navbar-header"><span class="navbar-brand">记忆游戏</span></div>
+        <div class="navbar-header"><a class="navbar-brand" href="/api/index.html">api</a></div>
+    </div>
+</nav>
+<script>
+function queryParams() {
+    return {
+        type: 'owner',
+        sort: 'updated',
+        direction: 'desc',
+        per_page: 100,
+        page: 5
+    };
+}
+$(function () {
+    var $table = $('#table-output');
+    $('#toolbar').find('select').change(function () {
+        $table.bootstrapTable('refreshOptions', {exportDataType: $(this).val()});
+      });
+    });
+</script>
+<div class="row">
+  <div class="col-xs-2">媒体
+        <select class="jss form-control" multiple="multiple">
+            <option selected="selected">orange</option>
+            <option selected="selected">purple</option>
+       </select>
+  </div>
+  <div class="col-xs-2">planid<input type="text" class="form-control"></div>
+  <div class="col-xs-2">imei<input type="text" class="form-control"></div>
+  <div class="col-xs-2">uid<input type="text" class="form-control"></div>
+</div>
+<script type="text/javascript">
+function matchStart (term, text) {
+  if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+    return true;
+  }
+
+  return false;
+}
+function formatState (state) {
+    /* console.log(state); */
+  if (!state.id) { return state.text; }
+  var $state = $('<span>' + state.text + ""+ '</span>'
+  );
+  return $state;
+};
+
+    function formatRepo2 (repo) {
+      if (repo.loading) return repo.text;
+      console.log("repo");
+      console.log(repo);
+      var markup = ("<div>" + repo.mname + "</div>");
+      return markup;
+    }
+function formatRepo (repo) {
+      if (repo.loading) return repo.text;
+      console.log("repo");
+      console.log(repo);
+      var markup = "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__meta'>" +
+          "<div class='select2-result-repository__title'>" + repo.full_name + "</div>div>";
+
+      if (repo.description) {
+              markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>div>";
+            }
+
+      markup += "<div class='select2-result-repository__statistics'>" +
+        "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i>i> " + repo.forks_count + " Forks</div>div>" +
+        "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i>i> " + repo.stargazers_count + " Stars</div>div>" +
+        "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i>i> " + repo.watchers_count + " Watchers</div>div>" +
+      "</div>div>" +
+      "</div>div></div>div>";
+
+      return "<div>idid<div>";
+    }
+ function formatRepoSe (repo) {
+      console.log("repo se");
+      console.log(repo);
+       return repo.rid || repo.text;
+     }
+
+$(".jss").select2({
+   tags: true,
+  // matcher: matchStart,
+  // tokenSeparators: [',', ' '],
+  ajax: {
+    url:"http://127.0.0.1:7000/json?func=get_mids",
+    //url: "https://api.github.com/search/repositories",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+      return {
+        q: params.term, // search term
+        page: params.page
+      };
+    },
+    processResults: function (data, params) {
+      console.log(data);
+      params.page = params.page || 1;
+      return {
+       // results: ["s", "mdmd"],
+       results: data,
+      //  results: data.items,
+       //  pagination: {more: (params.page * 30) < data.total_count}
+      };
+    },
+    cache: true
+  },
+  // escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+  minimumInputLength: 0,
+  // templateResult: formatState, // omitted for brevity, see the source of this page
+  templateResult: formatRepo, // omitted for brevity, see the source of this page
+  //templateSelection: formatState // omitted for brevity, see the source of this page
+  templateResult: formatRepoSe, // omitted for brevity, see the source of this page
+});
+</script>
+</body>
+</html>
